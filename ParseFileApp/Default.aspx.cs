@@ -93,8 +93,8 @@ namespace ParseFileApp
         private void saveData()
         {
             readFile();
-
             findSentences();
+            fillSavedSentences();
         }
 
         private void findSentences()

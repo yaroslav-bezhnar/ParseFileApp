@@ -22,9 +22,9 @@
             <asp:Button ID="btnStart" Text="Start" Width="100px" OnClick="btnStart_Click" runat="server"/>
         </div>
         <div>
-            <asp:Label ID="lblSavedSentences" Text="Saved sentences in database." runat="server"></asp:Label>
+            <asp:Label ID="lblSavedSentences" Text="Saved sentences in database:" runat="server"></asp:Label>
             <br />
-            <asp:ListBox ID="listBox" SelectionMode="Single" Width="500px" runat="server"/>
+            <asp:ListBox ID="listBox" SelectionMode="Single" style="overflow-x:auto;" Width="500px" Height="300px" runat="server"/>
         </div>
     </form>
 </body>
