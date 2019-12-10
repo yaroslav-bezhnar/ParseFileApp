@@ -1,9 +1,7 @@
-﻿#region
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-#endregion
 
 namespace ParseFileApp
 {
@@ -13,17 +11,21 @@ namespace ParseFileApp
     public sealed class SentenceManager
     {
         #region Constants
-        public const string DB_CONNECTION =
-            @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = MyDataBase; Integrated Security = True";
+
+        public const string DB_CONNECTION = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = MyDataBase; Integrated Security = True";
 
         private static SentenceManager _instance;
+
         #endregion
 
         #region Fields
+
         private readonly SqlConnection _connection;
+
         #endregion
 
         #region Constructors
+
         /// <summary>
         ///   Initialize a new instance of the <see cref="SentenceManager"/> class.
         /// </summary>
@@ -31,17 +33,16 @@ namespace ParseFileApp
         {
             _connection = new SqlConnection( DB_CONNECTION );
         }
+
         #endregion
 
         #region Public Methods
+
         /// <summary>
         ///   Gets instance of the <see cref="SentenceManager"/> class.
         /// </summary>
         /// <returns></returns>
-        public static SentenceManager GetInstance()
-        {
-            return _instance ?? ( _instance = new SentenceManager() );
-        }
+        public static SentenceManager GetInstance() => _instance ?? ( _instance = new SentenceManager() );
 
         /// <summary>
         ///   Adds information to table of database.
@@ -56,9 +57,7 @@ namespace ParseFileApp
             {
                 openConnection();
 
-                using ( var command =
-                    new SqlCommand( $@"INSERT INTO Sentences (Sentence, Occurrences) VALUES ('{reverseString( sentence )}', {count})",
-                                    _connection ) )
+                using ( var command = new SqlCommand( $@"INSERT INTO Sentences (Sentence, Occurrences) VALUES ('{reverseString( sentence )}', {count})", _connection ) )
                 {
                     command.ExecuteNonQuery();
                 }
@@ -101,9 +100,11 @@ namespace ParseFileApp
 
             return result;
         }
+
         #endregion
 
         #region Private Methods
+
         private void openConnection()
         {
             if ( _connection != null && _connection.State != ConnectionState.Open )
@@ -129,6 +130,7 @@ namespace ParseFileApp
 
             return new string( input.Reverse().ToArray() );
         }
+
         #endregion
     }
 }

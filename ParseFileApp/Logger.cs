@@ -1,23 +1,18 @@
-﻿#region
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-#endregion
 
 namespace ParseFileApp
 {
     [Flags]
     public enum MessageType
     {
-        [Description( "Info" )]
-        Info,
+        [Description( "Info" )] Info,
 
-        [Description( "Warning" )]
-        Warning,
+        [Description( "Warning" )] Warning,
 
-        [Description( "Error" )]
-        Error
+        [Description( "Error" )] Error
     }
 
     /// <summary>
@@ -26,19 +21,24 @@ namespace ParseFileApp
     public static class Logger
     {
         #region Constants
+
         private static readonly string _logTable;
         private static readonly SqlConnection _connection;
+
         #endregion
 
         #region Constructors
+
         static Logger()
         {
             _logTable = "LogInfo";
             _connection = new SqlConnection( SentenceManager.DB_CONNECTION );
         }
+
         #endregion
 
         #region Public Methogs
+
         /// <summary>
         ///     Write logging information to file.
         /// </summary>
@@ -60,9 +60,11 @@ namespace ParseFileApp
                 // ignored
             }
         }
+
         #endregion
 
         #region Private Methods
+
         private static void checkConnection()
         {
             if ( _connection != null && _connection.State != ConnectionState.Open )
@@ -70,6 +72,7 @@ namespace ParseFileApp
                 _connection.Open();
             }
         }
+
         #endregion
     }
 }

@@ -1,5 +1,4 @@
-﻿#region
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,23 +6,27 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-#endregion
 
 namespace ParseFileApp
 {
     public partial class Default : Page
     {
         #region Constants
+
         private static readonly char[] END_OF_SENTENCE_CHARS = { '.', '!', '?' };
+
         #endregion
 
         #region Fields
+
         private string _currentWord;
         private SentenceManager _manager;
         private List<string> _sentences;
+
         #endregion
 
         #region Protected Methods
+
         protected void Page_Load( object sender, EventArgs e )
         {
             _manager = SentenceManager.GetInstance();
@@ -55,9 +58,11 @@ namespace ParseFileApp
                 showMessage( "Please select the file." );
             }
         }
+
         #endregion
 
         #region Private Methods
+
         private void readFile()
         {
             Logger.WriteLog( $"Reading file '{fileUpload.FileName}'." );
@@ -69,8 +74,7 @@ namespace ParseFileApp
                 {
                     Logger.WriteLog( "Splitting text to sentences." );
 
-                    _sentences = text.Split( END_OF_SENTENCE_CHARS, StringSplitOptions.RemoveEmptyEntries )
-                                     .ToList();
+                    _sentences = text.Split( END_OF_SENTENCE_CHARS, StringSplitOptions.RemoveEmptyEntries ).ToList();
                 }
             }
             catch ( HttpException ex )
@@ -104,7 +108,7 @@ namespace ParseFileApp
                 foreach ( var sentence in _sentences )
                 {
                     var matches = Regex.Matches( $@"\b{sentence}\b", _currentWord,
-                                                 RegexOptions.IgnoreCase | RegexOptions.Compiled );
+                                                RegexOptions.IgnoreCase | RegexOptions.Compiled );
                     if ( matches.Count > 0 )
                     {
                         _manager.AddInfoToDatabase( sentence, matches.Count );
@@ -155,6 +159,7 @@ namespace ParseFileApp
                 listBox.Items.AddRange( sentences.Select( el => new ListItem( el ) ).ToArray() );
             }
         }
+
         #endregion
     }
 }
