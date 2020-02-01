@@ -107,8 +107,7 @@ namespace ParseFileApp
             {
                 foreach ( var sentence in _sentences )
                 {
-                    var matches = Regex.Matches( $@"\b{sentence}\b", _currentWord,
-                                                RegexOptions.IgnoreCase | RegexOptions.Compiled );
+                    var matches = Regex.Matches( $@"\b{sentence}\b", _currentWord, RegexOptions.IgnoreCase | RegexOptions.Compiled );
                     if ( matches.Count > 0 )
                     {
                         _manager.AddInfoToDatabase( sentence, matches.Count );

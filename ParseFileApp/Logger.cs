@@ -8,11 +8,14 @@ namespace ParseFileApp
     [Flags]
     public enum MessageType
     {
-        [Description( "Info" )] Info,
+        [Description( "Info" )]
+        Info,
 
-        [Description( "Warning" )] Warning,
+        [Description( "Warning" )]
+        Warning,
 
-        [Description( "Error" )] Error
+        [Description( "Error" )]
+        Error
     }
 
     /// <summary>
@@ -37,7 +40,7 @@ namespace ParseFileApp
 
         #endregion
 
-        #region Public Methogs
+        #region Public Methods
 
         /// <summary>
         ///     Write logging information to file.
